@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id")
 @Table(name = "reservations")
-public class Reservation {
+public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -33,18 +33,18 @@ public class Reservation {
     // cần chứa 2 khoá ngoại
     @ManyToOne
     @JoinColumn(name = "ROOM_ID")
-    private Room room;
+    private RoomEntity room;
 
     @ManyToOne
     @JoinColumn(name = "ROOM_TYPE_ID")
-    private RoomType roomType;
+    private RoomTypeEntity roomType;
 
 
 
-    public Reservation() {
+    public ReservationEntity() {
     }
 
-    public Reservation(int id, String code, String guestName, String guestIdNo, String guestPhone, String guestEmail, Date createDate, double price, int status, RoomType roomType, Room room) {
+    public ReservationEntity(int id, String code, String guestName, String guestIdNo, String guestPhone, String guestEmail, Date createDate, double price, int status, RoomTypeEntity roomType, RoomEntity room) {
         this.id = id;
         this.code = code;
         this.guestName = guestName;
@@ -130,19 +130,19 @@ public class Reservation {
         this.status = status;
     }
 
-    public RoomType getRoomType() {
+    public RoomTypeEntity getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(RoomTypeEntity roomType) {
         this.roomType = roomType;
     }
 
-    public Room getRoom() {
+    public RoomEntity getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(RoomEntity room) {
         this.room = room;
     }
 

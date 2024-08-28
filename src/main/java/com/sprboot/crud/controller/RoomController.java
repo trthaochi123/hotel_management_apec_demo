@@ -1,7 +1,6 @@
 package com.sprboot.crud.controller;
 
-import com.sprboot.crud.entity.Room;
-import com.sprboot.crud.entity.RoomType;
+import com.sprboot.crud.entity.RoomEntity;
 import com.sprboot.crud.repository.RoomRepository;
 import com.sprboot.crud.repository.RoomTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,28 +15,28 @@ public class RoomController {
     RoomTypeRepository repoRoomTypes;
 
     @GetMapping("/api/guest/rooms")
-    public List<Room> getAllRoom() {
-        List<Room> rooms = repo.findAll();
+    public List<RoomEntity> getAllRoom() {
+        List<RoomEntity> rooms = repo.findAll();
         return rooms;
     }
 
     @GetMapping("/api/guest/rooms/{id}")
-    public Room getRoom(@PathVariable int id) {
-        Room room = repo.findById(id).get();
+    public RoomEntity getRoom(@PathVariable int id) {
+        RoomEntity room = repo.findById(id).get();
         return room;
     }
 
     //Post: dùng @RequestBody de gui thong tin data duoi dang JSON/XML
     @PostMapping("/api/admin/rooms/add")
-    public void createRoom(@RequestBody Room rooms) {
+    public void createRoom(@RequestBody RoomEntity rooms) {
         repo.save(rooms);
     }
 
 
     //Put
     @PutMapping("/api/admin/rooms/update/{id}")
-    public Room updateRoom(@PathVariable int id, @RequestBody Room room) {
-        Room updateRoom = repo.findById(id).get(); // tìm đối tượng  Room hiện tại
+    public RoomEntity updateRoom(@PathVariable int id, @RequestBody RoomEntity room) {
+        RoomEntity updateRoom = repo.findById(id).get(); // tìm đối tượng  RoomEntity hiện tại
         // lay doi tuong từ @RequestBody, gan vao setCode() cua doi tuong updateRoom
         updateRoom.setCode(room.getCode());
         updateRoom.setName(room.getName());
@@ -51,7 +50,7 @@ public class RoomController {
     //Delete
     @DeleteMapping("/api/admin/rooms/delete/{id}")
     public void removeRoom(@PathVariable int id) {
-        Room room = repo.findById(id).get();
+        RoomEntity room = repo.findById(id).get();
         repo.delete(room);
     }
 }

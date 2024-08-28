@@ -1,7 +1,7 @@
 package com.sprboot.crud.repository;
 
-import com.sprboot.crud.entity.Room;
+import com.sprboot.crud.entity.RoomEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoomRepository extends JpaRepository<Room, Integer> {
+public interface RoomRepository extends JpaRepository<RoomEntity, Integer> {
 }

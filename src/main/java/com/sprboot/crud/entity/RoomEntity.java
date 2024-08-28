@@ -1,6 +1,5 @@
 package com.sprboot.crud.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -11,7 +10,7 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id")
 
 @Table(name = "rooms")
-public class Room {
+public class RoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -32,17 +31,17 @@ public class Room {
     // cần chứa khoá ngoại ROOM_TYPE_ID
     @ManyToOne
     @JoinColumn(name = "ROOM_TYPE_ID")
-    private RoomType roomType;
+    private RoomTypeEntity roomType;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
+    private List<ReservationEntity> reservations;
 
 
-    public Room() {
+    public RoomEntity() {
 
     }
 
-    public Room(int id, String code, String name, String description, String floor, RoomType roomType) {
+    public RoomEntity(int id, String code, String name, String description, String floor, RoomTypeEntity roomType) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -91,17 +90,17 @@ public class Room {
         this.floor = floor;
     }
 
-    public RoomType getRoomType() {
+    public RoomTypeEntity getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(RoomTypeEntity roomType) {
         this.roomType = roomType;
     }
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "RoomEntity{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +

@@ -1,13 +1,11 @@
 package com.sprboot.crud.controller;
 
-import com.sprboot.crud.entity.Reservation;
+import com.sprboot.crud.entity.ReservationEntity;
 import com.sprboot.crud.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,21 +15,21 @@ public class ReservationController {
 
     // get
     @GetMapping("/api/guest/reservations")
-    public List<Reservation> getAllReservation() {
-        List<Reservation> reservations = repo.findAll();
+    public List<ReservationEntity> getAllReservation() {
+        List<ReservationEntity> reservations = repo.findAll();
         return reservations;
     }
 
     @GetMapping("/api/guest/reservations/{id}")
-    public Reservation getReservation(@PathVariable int id) {
-        Reservation reservation = repo.findById(id).get();
+    public ReservationEntity getReservation(@PathVariable int id) {
+        ReservationEntity reservation = repo.findById(id).get();
         return reservation;
     }
 
     // post
     @PostMapping("/api/admin/reservations/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createReservation(@RequestBody Reservation reservation) {
+    public void createReservation(@RequestBody ReservationEntity reservation) {
 
         repo.save(reservation);
     }
@@ -39,8 +37,8 @@ public class ReservationController {
 
     // put
     @PutMapping("/api/admin/reservations/update/{id}")
-    public Reservation updateReservation(@PathVariable int id, @RequestBody Reservation reservation) {
-        Reservation updateReservation = repo.findById(id).get();
+    public ReservationEntity updateReservation(@PathVariable int id, @RequestBody ReservationEntity reservation) {
+        ReservationEntity updateReservation = repo.findById(id).get();
         updateReservation.setCode(reservation.getCode());
         updateReservation.setCreateDate(reservation.getCreateDate());
         updateReservation.setGuestEmail(reservation.getGuestEmail());
@@ -49,6 +47,8 @@ public class ReservationController {
         updateReservation.setGuestPhone(reservation.getGuestPhone());
         updateReservation.setPrice(reservation.getPrice());
         updateReservation.setStatus(reservation.getStatus());
+        updateReservation.setRoom(reservation.getRoom());
+        updateReservation.setRoomType(reservation.getRoomType());
         return repo.save(updateReservation);
     }
 
@@ -57,7 +57,7 @@ public class ReservationController {
     // delete
     @DeleteMapping("/api/admin/reservations/delete/{id}")
     public void removeReservation(@PathVariable int id) {
-        Reservation reservation = repo.findById(id).get();
+        ReservationEntity reservation = repo.findById(id).get();
         repo.delete(reservation);
     }
 }

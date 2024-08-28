@@ -1,6 +1,5 @@
 package com.sprboot.crud.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -10,7 +9,7 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id")
 @Table(name = "room_types")
 
-public class RoomType {
+public class RoomTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -35,16 +34,16 @@ public class RoomType {
 
 
 //    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
-//    private List<Room> rooms;
+//    private List<RoomEntity> rooms;
 
 //    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
-//    private List<Reservation> reservations;
+//    private List<ReservationEntity> reservations;
 
-    public RoomType() {
+    public RoomTypeEntity() {
 
     }
 
-    public RoomType(String code, String name, String description, int size, int numOfBed, int maxAdults, int maxChild, List<Room> rooms, List<Reservation> reservations) {
+    public RoomTypeEntity(String code, String name, String description, int size, int numOfBed, int maxAdults, int maxChild, List<RoomEntity> rooms, List<ReservationEntity> reservations) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -120,25 +119,25 @@ public class RoomType {
         this.maxChild = maxChild;
     }
 
-//    public List<Room> getRooms() {
+//    public List<RoomEntity> getRooms() {
 //        return rooms;
 //    }
 
-//    public void setRooms(List<Room> rooms) {
+//    public void setRooms(List<RoomEntity> rooms) {
 //        this.rooms = rooms;
 //    }
 
-//    public List<Reservation> getReservations() {
+//    public List<ReservationEntity> getReservations() {
 //        return reservations;
 //    }
 
-//    public void setReservations(List<Reservation> reservations) {
+//    public void setReservations(List<ReservationEntity> reservations) {
 //        this.reservations = reservations;
 //    }
 
     @Override
     public String toString() {
-        return "RoomType{" +
+        return "RoomTypeEntity{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
