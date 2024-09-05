@@ -41,7 +41,8 @@ public class SecurityConfig {
                 // các phương thức cấu hình bảo mật này yêu cầu xử lý ngoại lệ can throws Exception
                 // cấu hình quyền truy cập dựa trên URL
 //                .authorizeHttpRequests((api) -> api
-                .authorizeHttpRequests(request -> request.requestMatchers("auth/**").permitAll()
+                .authorizeHttpRequests(request -> request
+                                .requestMatchers("auth/**").permitAll()
                                 .requestMatchers("/api/guest/**").hasAnyAuthority("GUEST", "ADMIN")
                                 .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
                                 .anyRequest().authenticated() //tất cả các request cần phải xác thực.
@@ -60,6 +61,10 @@ public class SecurityConfig {
         return http.build();
     }
 
+
+    // chịu trách nhiệm xác thực người dùng
+    // sử dụng ourUserDetailsService để lấy thông tin người dùng từ cơ sở dữ liệu
+    // và sử dụng passwordEncoder() để kiểm tra mật khẩu.
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -74,6 +79,7 @@ public class SecurityConfig {
         users.add(createUser("guest", passwordEncoder().encode("guest123"), "GUEST" ));
         users.add(createUser("admin", passwordEncoder().encode("admin123"), "ADMIN" ));
 
+        // Lưu trữ thông tin người dùng trong bộ nhớ (RAM)
         return new InMemoryUserDetailsManager(users);
     }
 
@@ -88,11 +94,12 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-
-//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        // Mật khẩu được mã hóa bằng thuật toán BCrypt.
         return new BCryptPasswordEncoder();
     }
 
+
+    //  kiểm tra thông tin đăng nhập (username và password) và xác thực người dùng
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

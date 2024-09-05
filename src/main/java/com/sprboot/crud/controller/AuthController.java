@@ -16,8 +16,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    // nhận dữ liệu từ phía client và truyền vào ReqRes
+    // nhận lại ReqRes từ service và trả về client
     @PostMapping("/auth/signup")
     public ResponseEntity<ReqRes> signUp(@RequestBody ReqRes signUpRequest){
+        // Gọi AuthService để xử lý logic xác thực
         return ResponseEntity.ok(authService.signUp(signUpRequest));
     }
     @PostMapping("/auth/signin")

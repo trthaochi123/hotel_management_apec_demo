@@ -43,15 +43,15 @@ public class RoomTypeImpl implements RoomType {
 
     @Override
     public RoomTypeEntity updateRoomType(@PathVariable int id, @RequestBody RoomTypeEntity roomType) {
-        RoomTypeEntity updateToomType = repoRoomType.findById(id).get();
-        updateToomType.setCode(roomType.getCode());
-        updateToomType.setName(roomType.getName());
-        updateToomType.setDescription(roomType.getDescription());
-        updateToomType.setSize(roomType.getSize());
-        updateToomType.setNumOfBed(roomType.getNumOfBed());
-        updateToomType.setMaxAdults(roomType.getMaxAdults());
-        updateToomType.setMaxChild(roomType.getMaxChild());
-        return repoRoomType.save(updateToomType);    }
+        RoomTypeEntity updateRoomType = repoRoomType.findById(id).get();
+        updateRoomType.setCode(roomType.getCode());
+        updateRoomType.setName(roomType.getName());
+        updateRoomType.setDescription(roomType.getDescription());
+        updateRoomType.setSize(roomType.getSize());
+        updateRoomType.setNumOfBed(roomType.getNumOfBed());
+        updateRoomType.setMaxAdults(roomType.getMaxAdults());
+        updateRoomType.setMaxChild(roomType.getMaxChild());
+        return repoRoomType.save(updateRoomType);    }
 
     @Override
     public void removeRoomType(@PathVariable int id) {
