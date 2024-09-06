@@ -29,7 +29,7 @@ public class JWTUtils {
         byte[] keyBytes = Base64.getDecoder().decode(secreteString.getBytes(StandardCharsets.UTF_8));
 
         //tạo ra một đối tượng SecretKeySpec sử dụng mảng byte đã được giải mã (keyBytes)
-        // và chỉ định thuật toán mã hóa là "HmacSHA256".
+        // chỉ định thuật toán mã hóa là "HmacSHA256".
         this.Key = new SecretKeySpec(keyBytes, "HmacSHA256");
     }
 

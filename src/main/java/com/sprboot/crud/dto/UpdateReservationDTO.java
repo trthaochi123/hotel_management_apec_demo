@@ -1,16 +1,22 @@
-package com.sprboot.crud.model;
+package com.sprboot.crud.dto;
 
-import com.sprboot.crud.dto.RoomDTO;
-import com.sprboot.crud.dto.RoomTypeDTO;
 import com.sprboot.crud.entity.RoomEntity;
 import com.sprboot.crud.entity.RoomTypeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
-public class Reservation {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class UpdateReservationDTO {
     private int id;
     private String code;
     private String guestName;
@@ -21,7 +27,7 @@ public class Reservation {
     private double price;
     private int status;
 
-    // cần chứa 2 khoá ngoại
     private RoomDTO room;
+
     private RoomTypeDTO roomType;
 }

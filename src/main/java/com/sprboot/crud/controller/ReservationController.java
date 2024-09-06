@@ -1,6 +1,7 @@
 package com.sprboot.crud.controller;
 
-import com.sprboot.crud.entity.ReservationEntity;
+import com.sprboot.crud.dto.ReservationDTO;
+import com.sprboot.crud.dto.UpdateReservationDTO;
 import com.sprboot.crud.repository.ReservationRepository;
 import com.sprboot.crud.service.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,27 +20,27 @@ public class ReservationController {
 
     // get
     @GetMapping("/api/guest/reservations")
-    public List<ReservationEntity> getAllReservation() {
+    public List<ReservationDTO> getAllReservation() {
         return reservationInterface.getAllReservation();
     }
 
     @GetMapping("/api/guest/reservations/{id}")
-    public ReservationEntity getReservation(@PathVariable int id) {
+    public ReservationDTO getReservation(@PathVariable int id) {
         return reservationInterface.getReservationById(id);
     }
 
     // post
     @PostMapping("/api/admin/reservations/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createReservation(@RequestBody ReservationEntity reservation) {
-        reservationInterface.createReservation(reservation);
+    public ReservationDTO createReservation(@RequestBody ReservationDTO reservation) {
+       return reservationInterface.createReservation(reservation);
     }
 
 
     // put
     @PutMapping("/api/admin/reservations/update/{id}")
-    public ReservationEntity updateReservation(@PathVariable int id, @RequestBody ReservationEntity reservation) {
-        return reservationInterface.updateReservation(id, reservation);
+    public ReservationDTO updateReservation(@RequestBody UpdateReservationDTO updateReservationDTO) {
+        return reservationInterface.updateReservation(updateReservationDTO);
     }
 
 

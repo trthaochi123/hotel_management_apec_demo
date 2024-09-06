@@ -1,6 +1,7 @@
 package com.sprboot.crud.controller;
 
-import com.sprboot.crud.entity.RoomTypeEntity;
+import com.sprboot.crud.dto.RoomTypeDTO;
+import com.sprboot.crud.dto.UpdateRoomTypeDTO;
 import com.sprboot.crud.repository.RoomTypeRepository;
 import com.sprboot.crud.service.AuthService;
 import com.sprboot.crud.service.RoomType;
@@ -20,21 +21,27 @@ public class RoomTypeController {
 
     // localhost:8080/api/guest/roomTypes
     @GetMapping("/api/guest/roomTypes")
-    public List<RoomTypeEntity> getAllRoomTypes() {
+    public List<RoomTypeDTO> getAllRoomTypes() {
         return roomTypeInterface.getAllRoomTypes();
+    }
+
+    @GetMapping("/api/guest/roomTypes/{id}")
+    public RoomTypeDTO getRoomType(@PathVariable int id) {
+
+        return roomTypeInterface.getRoomType(id);
     }
 
     @PostMapping("/api/admin/roomTypes/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createRoomType(@RequestBody RoomTypeEntity roomType) {
-        roomTypeInterface.createRoomType(roomType);
+    public RoomTypeDTO createRoomType(@RequestBody RoomTypeDTO roomType) {
+        return roomTypeInterface.createRoomType(roomType);
     }
 
 
     // localhost:8080/api/admin/roomTypes/update/id
     @PutMapping("/api/admin/roomTypes/update/{id}")
-    public RoomTypeEntity updateRoomType(@PathVariable int id, @RequestBody RoomTypeEntity roomType) {
-        return roomTypeInterface.updateRoomType(id, roomType);
+    public RoomTypeDTO updateRoomType(@RequestBody UpdateRoomTypeDTO updateRoomTypeDTO) {
+        return roomTypeInterface.updateRoomType(updateRoomTypeDTO);
     }
 
     // localhost:8080/api/admin/roomTypes/delete/12

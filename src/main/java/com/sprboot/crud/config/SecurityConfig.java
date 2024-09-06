@@ -42,7 +42,7 @@ public class SecurityConfig {
                 // cấu hình quyền truy cập dựa trên URL
 //                .authorizeHttpRequests((api) -> api
                 .authorizeHttpRequests(request -> request
-                                .requestMatchers("auth/**").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/api/guest/**").hasAnyAuthority("GUEST", "ADMIN")
                                 .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
                                 .anyRequest().authenticated() //tất cả các request cần phải xác thực.

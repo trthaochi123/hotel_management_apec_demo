@@ -1,6 +1,8 @@
 package com.sprboot.crud.controller;
 
-import com.sprboot.crud.dto.ReqRes;
+import com.sprboot.crud.dto.RefreshTokenDTO;
+import com.sprboot.crud.dto.SignInDTO;
+import com.sprboot.crud.dto.SignUpDTO;
 import com.sprboot.crud.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 public class AuthController {
 
     @Autowired
@@ -19,16 +20,17 @@ public class AuthController {
     // nhận dữ liệu từ phía client và truyền vào ReqRes
     // nhận lại ReqRes từ service và trả về client
     @PostMapping("/auth/signup")
-    public ResponseEntity<ReqRes> signUp(@RequestBody ReqRes signUpRequest){
+    public SignUpDTO signUp(@RequestBody SignUpDTO signUpRequest){
         // Gọi AuthService để xử lý logic xác thực
-        return ResponseEntity.ok(authService.signUp(signUpRequest));
+        return authService.signUp(signUpRequest);
     }
     @PostMapping("/auth/signin")
-    public ResponseEntity<ReqRes> signIn(@RequestBody ReqRes signInRequest){
-        return ResponseEntity.ok(authService.signIn(signInRequest));
+    public SignInDTO signIn(@RequestBody SignInDTO signInRequest){
+        return authService.signIn(signInRequest);
     }
     @PostMapping("/auth/refresh")
-    public ResponseEntity<ReqRes> refreshToken(@RequestBody ReqRes refreshTokenRequest){
-        return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
+    public RefreshTokenDTO refreshToken(@RequestBody RefreshTokenDTO refreshTokenRequest){
+        return authService.refreshToken(refreshTokenRequest);
     }
+
 }

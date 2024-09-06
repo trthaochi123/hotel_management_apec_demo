@@ -1,6 +1,7 @@
 package com.sprboot.crud.controller;
 
-import com.sprboot.crud.entity.RoomEntity;
+import com.sprboot.crud.dto.RoomDTO;
+import com.sprboot.crud.dto.UpdateRoomDTO;
 import com.sprboot.crud.repository.RoomRepository;
 import com.sprboot.crud.repository.RoomTypeRepository;
 import com.sprboot.crud.service.Room;
@@ -18,26 +19,26 @@ public class RoomController {
     RoomRepository roomRepo;
 
     @GetMapping("/api/guest/rooms")
-    public List<RoomEntity> getAllRoom() {
+    public List<RoomDTO> getAllRoom() {
         return roomInterface.getAllRoom();
     }
 
     @GetMapping("/api/guest/rooms/{id}")
-    public RoomEntity getRoomById(@PathVariable int id) {
+    public RoomDTO getRoomById(@PathVariable int id) {
         return roomInterface.getRoomById(id);
     }
 
     //Post: dùng @RequestBody de gui thong tin data duoi dang JSON/XML
     @PostMapping("/api/admin/rooms/add")
-    public void createRoom(@RequestBody RoomEntity rooms) {
-        roomInterface.createRoom(rooms);
+    public RoomDTO createRoom(@RequestBody RoomDTO rooms) {
+        return roomInterface.createRoom(rooms);
     }
 
 
     //Put
     @PutMapping("/api/admin/rooms/update/{id}")
-    public RoomEntity updateRoom(@PathVariable int id, @RequestBody RoomEntity room) {
-        return roomInterface.updateRoom(id, room);
+    public RoomDTO updateRoom(@RequestBody UpdateRoomDTO updateRoomDTO) {
+        return roomInterface.updateRoom(updateRoomDTO);
     }
 
     //Delete

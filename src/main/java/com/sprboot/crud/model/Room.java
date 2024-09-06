@@ -1,5 +1,6 @@
 package com.sprboot.crud.model;
 
+import com.sprboot.crud.dto.RoomTypeDTO;
 import com.sprboot.crud.entity.ReservationEntity;
 import com.sprboot.crud.entity.RoomTypeEntity;
 import jakarta.persistence.*;
@@ -19,7 +20,6 @@ public class Room {
 
 
     // cần chứa khoá ngoại ROOM_TYPE_ID
-    private RoomTypeEntity roomType;
+    private RoomTypeDTO roomType;
 
-    private List<ReservationEntity> reservations;
 }
